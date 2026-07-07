@@ -33,9 +33,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             IntroAndroid2026Theme {
-               var lista = remember {mutableListOf("")}
-                //usar un column y dentro un for que muestre los nombres
-               Formulario()
+
+              Column {
+                  Header()
+                  Formulario()
+              }
             }
         }
     }
