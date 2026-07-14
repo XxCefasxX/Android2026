@@ -1,5 +1,6 @@
 package com.cefasprojects.unidep2026.naveacion
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -36,8 +37,9 @@ fun Pantalla2(navController: NavController, personasViewmodel: PersonasViewModel
                     nombre = persona.nombre,
                     edad = persona.edad,
                     genero = persona.genero,
-                    onClick ={
-                        navController.navigate("pantalla3")
+                    onClick = {
+                        Log.d("NAV", "Click en ${persona.id}")
+                        navController.navigate("pantalla4/${persona.id}")
                     })
 
             }

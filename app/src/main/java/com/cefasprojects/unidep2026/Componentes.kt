@@ -18,6 +18,8 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -33,6 +35,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil3.compose.AsyncImage
 import com.cefasprojects.unidep2026.intro.Persona
 
@@ -53,7 +56,7 @@ fun Formulario() {
 
         Button(onClick = {
 
-            lista.add(Persona(nombre, edad.toInt(), genero))
+            lista.add(Persona(Id = "", nombre, edad.toInt(), genero))
             nombre = ""
             edad = ""
             genero = ""
@@ -68,18 +71,19 @@ fun Formulario() {
 
         LazyColumn() {
             items(lista) { it ->
-               // DatosPersona(it.nombre, it.edad, it.genero)
+                // DatosPersona(it.nombre, it.edad, it.genero)
             }
         }
     }
 }
 
 @Composable
-fun DatosPersona(nombre: String, edad: Int, genero: String,onClick: () -> Unit) {
+fun DatosPersona(nombre: String, edad: Int, genero: String, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .background(Color.Cyan)
-            .padding(top = 5.dp)
+            .padding(top = 5.dp),
+        onClick = onClick
     ) {
         Row {
             //mostrar una imagen depediendo la edad y el genero
@@ -91,7 +95,7 @@ fun DatosPersona(nombre: String, edad: Int, genero: String,onClick: () -> Unit) 
             )
 
 
-            Column{
+            Column {
                 Text(
                     nombre,
                     modifier = Modifier.padding(20.dp)
@@ -134,4 +138,35 @@ fun MiTextField(
         modifier = Modifier.fillMaxWidth()
 
     )
+}
+
+@Composable
+fun BottomBar(navController: NavController) {
+
+    NavigationBar {
+
+        NavigationBarItem(
+            selected = false,
+            onClick = {
+                navController.navigate("Home")
+            },
+            icon = {
+                Icon(Icons.Default.Home, null)
+            },
+            label = {
+                Text("Inicio")
+            }
+        )
+        NavigationBarItem(
+            selected = false,
+            onClick = {
+                navController.navigate("Pantalla2")
+            },
+            icon = {
+                Icon(Icons.Default.Person, null)
+            },
+            label = {
+                Text("P2")
+            })
+    }
 }

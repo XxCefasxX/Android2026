@@ -10,12 +10,8 @@ import com.cefasprojects.unidep2026.intro.Persona
 
 @Composable
 fun Pantalla3(
-    navController: NavController,
-    idPersona: String,
-    personasViewMOdel: PersonasViewModel
+    navController: NavController
 ) {
-
-    var persona = personasViewMOdel.lista
     Column {
         Text("Pantalla 3")
 
