@@ -23,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.cefasprojects.unidep2026.naveacion.Navegacion
 import com.cefasprojects.unidep2026.ui.theme.IntroAndroid2026Theme
 
 class MainActivity : ComponentActivity() {
@@ -34,10 +35,15 @@ class MainActivity : ComponentActivity() {
         setContent {
             IntroAndroid2026Theme {
 
-              Column {
-                  Header()
-                  Formulario()
-              }
+             Navegacion()
+
+               //Crear 3 clases mas relacionadas con su tema
+                //2 de las clases deben de estar relacionadas, como personas y puestos
+                //crear los formularios para llenar la informacion de esas clases
+                //crear sus respectivos viewmodels para llenar la informacion
+
+
+
             }
         }
     }
