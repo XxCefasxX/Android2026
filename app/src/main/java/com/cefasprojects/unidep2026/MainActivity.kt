@@ -18,13 +18,18 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.lifecycleScope
+import com.cefasprojects.unidep2026.intro.Movie
+import com.cefasprojects.unidep2026.intro.RetrofitServiceFactory
 import com.cefasprojects.unidep2026.naveacion.Navegacion
 import com.cefasprojects.unidep2026.ui.theme.IntroAndroid2026Theme
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     val TAG = "CicloDeVIda"
@@ -32,6 +37,15 @@ class MainActivity : ComponentActivity() {
         Log.i(TAG, "onCreate")
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        val moviesService = RetrofitServiceFactory.bildRetrofitService()
+        var lista = mutableStateListOf<Movie>()
+        lifecycleScope.launch {
+            val movies = moviesService.ListMoviesByPopularity("f0de4e8ff996107753182dda2b588d0c")
+            Log.i("movies", movies.results[1].toString())
+            lista.clear()
+            lista.addAll(movies.results)
+        }
+
         setContent {
             IntroAndroid2026Theme {
 

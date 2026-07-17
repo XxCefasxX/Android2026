@@ -61,4 +61,16 @@ dependencies {
 
     implementation("androidx.navigation:navigation-compose:2.9.3")
 
+    //retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    //corrutinas
+    // LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.11.0")
+// Lifecycles only (without ViewModel or LiveData)
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.11.0")
+// Lifecycle utilities for Compose
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.11.0")
+
 }
