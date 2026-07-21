@@ -6,7 +6,7 @@ plugins {
 android {
     namespace = "com.cefasprojects.unidep2026"
     compileSdk {
-        version = release(36) {
+        version = release(37) {
             minorApiLevel = 1
         }
     }
@@ -58,7 +58,7 @@ dependencies {
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.3.0")
     implementation("androidx.compose.material:material-icons-extended")
 
-
+//composse nav
     implementation("androidx.navigation:navigation-compose:2.9.3")
 
     //retrofit

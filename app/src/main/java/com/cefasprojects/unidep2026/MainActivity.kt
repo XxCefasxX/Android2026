@@ -27,6 +27,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
 import com.cefasprojects.unidep2026.intro.Movie
 import com.cefasprojects.unidep2026.intro.RetrofitServiceFactory
+import com.cefasprojects.unidep2026.moviesapp.navegation.Navegation
+import com.cefasprojects.unidep2026.moviesapp.viewmodel.MoviesViewModel
+import com.cefasprojects.unidep2026.moviesapp.views.MovieCard
 import com.cefasprojects.unidep2026.naveacion.Navegacion
 import com.cefasprojects.unidep2026.ui.theme.IntroAndroid2026Theme
 import kotlinx.coroutines.launch
@@ -41,7 +44,14 @@ class MainActivity : ComponentActivity() {
         var lista = mutableStateListOf<Movie>()
         lifecycleScope.launch {
             val movies = moviesService.ListMoviesByPopularity("f0de4e8ff996107753182dda2b588d0c")
-            Log.i("movies", movies.results[1].toString())
+
+            Log.i("movies", movies.results[5].title.toString())
+//            val id=movies.results[5].id.toString()
+//            val mob = moviesService.MovieDetails(
+//                movieId = id,
+//                apiKey = "f0de4e8ff996107753182dda2b588d0c"
+//            )
+            //Log.i("movies", mob.overview)
             lista.clear()
             lista.addAll(movies.results)
         }
@@ -49,13 +59,12 @@ class MainActivity : ComponentActivity() {
         setContent {
             IntroAndroid2026Theme {
 
-             Navegacion()
-
-               //Crear 3 clases mas relacionadas con su tema
-                //2 de las clases deben de estar relacionadas, como personas y puestos
-                //crear los formularios para llenar la informacion de esas clases
-                //crear sus respectivos viewmodels para llenar la informacion
-
+                Navegation()
+//                LazyColumn() {
+//                    items(lista) { pelicula ->
+//                        MovieCard(pelicula)
+//                    }
+//                }
 
 
             }

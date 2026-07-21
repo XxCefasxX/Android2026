@@ -1,0 +1,32 @@
+package com.cefasprojects.unidep2026.moviesapp.navegation
+
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.cefasprojects.unidep2026.BottomBar
+import com.cefasprojects.unidep2026.moviesapp.viewmodel.MoviesViewModel
+import com.cefasprojects.unidep2026.moviesapp.views.ListScreen
+
+@Composable
+fun Navegation(){
+    val moviesViewModel: MoviesViewModel = viewModel()
+    val navController = rememberNavController()
+    Scaffold(
+
+    ) { innerPadding ->
+        NavHost(
+            navController = navController,
+            startDestination = "List",
+            modifier = Modifier.padding(innerPadding)
+        ) {
+            composable("List") {
+                ListScreen(moviesViewModel)
+            }
+        }
+    }
+}
