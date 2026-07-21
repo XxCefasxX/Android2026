@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.cefasprojects.unidep2026.moviesapp.viewmodel.MoviesViewModel
+import com.cefasprojects.unidep2026.moviesapp.views.ActoresListScreen
 import com.cefasprojects.unidep2026.moviesapp.views.DetallesScreen
 import com.cefasprojects.unidep2026.moviesapp.views.ListScreen
 
@@ -34,6 +35,10 @@ fun Navegation() {
                 val id = backStackEntry.arguments?.getString("id")!!.toInt()
                 moviesViewModel.obtenerDetalle(id.toString())
                 DetallesScreen(moviesViewModel)
+            }
+            composable("Actors") {
+                moviesViewModel.cargaActores()
+                ActoresListScreen(navController, moviesViewModel)
             }
         }
     }

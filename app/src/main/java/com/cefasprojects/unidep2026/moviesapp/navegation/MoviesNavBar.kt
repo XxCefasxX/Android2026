@@ -24,19 +24,19 @@ fun MovieNavBar(navController: NavController) {
                 Icon(Icons.Default.Home, null)
             },
             label = {
-                Text("Lista")
+                Text("Peliculas")
             }
         )
         NavigationBarItem(
             selected = false,
             onClick = {
-                navController.navigate("Pantalla2")
+                navController.navigate("Actors")
             },
             icon = {
                 Icon(Icons.Default.Person, null)
             },
             label = {
-                Text("P2")
+                Text("Acores")
             })
     }
 }

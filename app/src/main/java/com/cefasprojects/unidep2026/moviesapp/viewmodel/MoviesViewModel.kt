@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cefasprojects.unidep2026.intro.Movie
 import com.cefasprojects.unidep2026.intro.RetrofitServiceFactory
+import com.cefasprojects.unidep2026.moviesapp.model.Actor
 import com.cefasprojects.unidep2026.moviesapp.model.CastResult
 import com.cefasprojects.unidep2026.moviesapp.model.MovieResult
 import kotlinx.coroutines.launch
@@ -16,6 +17,7 @@ import kotlinx.coroutines.launch
 class MoviesViewModel : ViewModel() {
     private val moviesService = RetrofitServiceFactory.bildRetrofitService()
     var lista = mutableStateListOf<Movie>()
+    var listaActores = mutableStateListOf<Actor>()
     var movie by mutableStateOf<MovieResult?>(null)
 
 
@@ -51,6 +53,15 @@ class MoviesViewModel : ViewModel() {
             movie = moviesService.MovieDetails(movieId = id)
             movieCast = moviesService.MovieCast(movieId = id)
 
+        }
+    }
+
+    fun cargaActores() {
+        viewModelScope.launch {
+            val response = moviesService.ActorsList()
+
+            listaActores.clear()
+            listaActores.addAll(response.results)
         }
     }
 }
