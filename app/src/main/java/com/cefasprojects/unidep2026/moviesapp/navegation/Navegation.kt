@@ -8,15 +8,17 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.cefasprojects.unidep2026.BottomBar
 import com.cefasprojects.unidep2026.moviesapp.viewmodel.MoviesViewModel
+import com.cefasprojects.unidep2026.moviesapp.views.DetallesScreen
 import com.cefasprojects.unidep2026.moviesapp.views.ListScreen
 
 @Composable
-fun Navegation(){
+fun Navegation() {
     val moviesViewModel: MoviesViewModel = viewModel()
     val navController = rememberNavController()
-    Scaffold(
+    Scaffold(bottomBar = {
+        MovieNavBar(navController)
+    }
 
     ) { innerPadding ->
         NavHost(
@@ -25,7 +27,13 @@ fun Navegation(){
             modifier = Modifier.padding(innerPadding)
         ) {
             composable("List") {
-                ListScreen(moviesViewModel)
+                ListScreen(navController, moviesViewModel)
+            }
+            composable("Detail/{id}") { backStackEntry ->
+
+                val id = backStackEntry.arguments?.getString("id")!!.toInt()
+
+                DetallesScreen(moviesViewModel)
             }
         }
     }

@@ -10,11 +10,15 @@ import androidx.lifecycle.viewModelScope
 import com.cefasprojects.unidep2026.intro.Movie
 import com.cefasprojects.unidep2026.intro.Persona
 import com.cefasprojects.unidep2026.intro.RetrofitServiceFactory
+import com.cefasprojects.unidep2026.moviesapp.model.MovieResult
 import kotlinx.coroutines.launch
 
 class MoviesViewModel : ViewModel() {
     private val moviesService = RetrofitServiceFactory.bildRetrofitService()
     var lista = mutableStateListOf<Movie>()
+    var movie by mutableStateOf<MovieResult?>(null)
+        private set
+
     init {
         cargarPeliculas()
     }
@@ -33,12 +37,19 @@ class MoviesViewModel : ViewModel() {
                 lista.addAll(response.results)
 
             } catch (e: Exception) {
-
-
-
             }
 
         }
 
+    }
+
+    fun obtenerDetalle(id: String) {
+
+        viewModelScope.launch {
+
+            movie =
+                moviesService.MovieDetails(movieId = id, apiKey = "f0de4e8ff996107753182dda2b588d0c")
+
+        }
     }
 }

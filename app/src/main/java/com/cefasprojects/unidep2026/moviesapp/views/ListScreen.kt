@@ -3,14 +3,22 @@ package com.cefasprojects.unidep2026.moviesapp.views
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavController
 import com.cefasprojects.unidep2026.moviesapp.viewmodel.MoviesViewModel
 
 @Composable
-fun ListScreen(moviesViewModel: MoviesViewModel){
+fun ListScreen(navController: NavController, moviesViewModel: MoviesViewModel) {
 
     LazyColumn() {
         items(moviesViewModel.lista) { pelicula ->
-            MovieCard(pelicula)
+            MovieCard(movie = pelicula, onClick = {
+
+                // Guardamos qué película fue seleccionada
+                moviesViewModel.obtenerDetalle(pelicula.id.toString())
+
+                // Navegamos
+                navController.navigate("Detail/${pelicula.id}")
+            })
         }
     }
 }
