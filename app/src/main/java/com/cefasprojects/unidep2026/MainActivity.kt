@@ -40,21 +40,7 @@ class MainActivity : ComponentActivity() {
         Log.i(TAG, "onCreate")
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        val moviesService = RetrofitServiceFactory.bildRetrofitService()
-        var lista = mutableStateListOf<Movie>()
-        lifecycleScope.launch {
-            val movies = moviesService.ListMoviesByPopularity("f0de4e8ff996107753182dda2b588d0c")
 
-            Log.i("movies", movies.results[5].title.toString())
-//            val id=movies.results[5].id.toString()
-//            val mob = moviesService.MovieDetails(
-//                movieId = id,
-//                apiKey = "f0de4e8ff996107753182dda2b588d0c"
-//            )
-            //Log.i("movies", mob.overview)
-            lista.clear()
-            lista.addAll(movies.results)
-        }
 
         setContent {
             IntroAndroid2026Theme {

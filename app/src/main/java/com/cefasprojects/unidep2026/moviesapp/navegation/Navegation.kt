@@ -32,7 +32,7 @@ fun Navegation() {
             composable("Detail/{id}") { backStackEntry ->
 
                 val id = backStackEntry.arguments?.getString("id")!!.toInt()
-
+                moviesViewModel.obtenerDetalle(id.toString())
                 DetallesScreen(moviesViewModel)
             }
         }

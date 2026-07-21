@@ -8,8 +8,8 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cefasprojects.unidep2026.intro.Movie
-import com.cefasprojects.unidep2026.intro.Persona
 import com.cefasprojects.unidep2026.intro.RetrofitServiceFactory
+import com.cefasprojects.unidep2026.moviesapp.model.CastResult
 import com.cefasprojects.unidep2026.moviesapp.model.MovieResult
 import kotlinx.coroutines.launch
 
@@ -17,7 +17,10 @@ class MoviesViewModel : ViewModel() {
     private val moviesService = RetrofitServiceFactory.bildRetrofitService()
     var lista = mutableStateListOf<Movie>()
     var movie by mutableStateOf<MovieResult?>(null)
-        private set
+
+
+    var movieCast by mutableStateOf<CastResult?>(null)
+
 
     init {
         cargarPeliculas()
@@ -29,9 +32,7 @@ class MoviesViewModel : ViewModel() {
 
             try {
 
-                val response = moviesService.ListMoviesByPopularity(
-                    "f0de4e8ff996107753182dda2b588d0c"
-                )
+                val response = moviesService.ListMoviesByPopularity()
 
                 lista.clear()
                 lista.addAll(response.results)
@@ -47,8 +48,8 @@ class MoviesViewModel : ViewModel() {
 
         viewModelScope.launch {
 
-            movie =
-                moviesService.MovieDetails(movieId = id, apiKey = "f0de4e8ff996107753182dda2b588d0c")
+            movie = moviesService.MovieDetails(movieId = id)
+            movieCast = moviesService.MovieCast(movieId = id)
 
         }
     }
