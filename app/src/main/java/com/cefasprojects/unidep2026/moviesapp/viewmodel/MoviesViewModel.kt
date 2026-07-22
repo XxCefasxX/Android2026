@@ -10,6 +10,8 @@ import androidx.lifecycle.viewModelScope
 import com.cefasprojects.unidep2026.intro.Movie
 import com.cefasprojects.unidep2026.intro.RetrofitServiceFactory
 import com.cefasprojects.unidep2026.moviesapp.model.Actor
+import com.cefasprojects.unidep2026.moviesapp.model.ActorCastResult
+import com.cefasprojects.unidep2026.moviesapp.model.ActorDetailsResult
 import com.cefasprojects.unidep2026.moviesapp.model.CastResult
 import com.cefasprojects.unidep2026.moviesapp.model.MovieResult
 import kotlinx.coroutines.launch
@@ -19,10 +21,12 @@ class MoviesViewModel : ViewModel() {
     var lista = mutableStateListOf<Movie>()
     var listaActores = mutableStateListOf<Actor>()
     var movie by mutableStateOf<MovieResult?>(null)
-
-
     var movieCast by mutableStateOf<CastResult?>(null)
 
+
+
+    var actor by mutableStateOf<ActorDetailsResult?>(null)
+    var actorMovies by mutableStateOf<ActorCastResult?>(null)
 
     init {
         cargarPeliculas()
@@ -64,4 +68,14 @@ class MoviesViewModel : ViewModel() {
             listaActores.addAll(response.results)
         }
     }
+
+    fun GetActorDetails(id: String) {
+        viewModelScope.launch {
+            actor = moviesService.ActorDetails(id)
+            actorMovies = moviesService.GetActorMovies(id)
+
+
+        }
+    }
+
 }

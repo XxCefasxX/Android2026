@@ -12,7 +12,10 @@ fun ActoresListScreen(navController: NavController, moviesViewModel: MoviesViewM
     val listaActores = moviesViewModel.listaActores
     LazyColumn {
         items(listaActores) { actor ->
-            Text(actor.name)
+            ActorCard(actor, onClick = {
+                //moviesViewModel.GetActorDetails(actor.id.toString())
+                navController.navigate("ActorDetail/${actor.id}")
+            })
         }
     }
 }

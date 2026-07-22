@@ -2,6 +2,8 @@ package com.cefasprojects.unidep2026.intro
 
 
 import com.cefasprojects.unidep2026.moviesapp.API_KEY
+import com.cefasprojects.unidep2026.moviesapp.model.ActorCastResult
+import com.cefasprojects.unidep2026.moviesapp.model.ActorDetailsResult
 import com.cefasprojects.unidep2026.moviesapp.model.ActorsResult
 import com.cefasprojects.unidep2026.moviesapp.model.CastResult
 import com.cefasprojects.unidep2026.moviesapp.model.MovieResult
@@ -35,6 +37,18 @@ interface RetrofitService {
     suspend fun ActorsList(
         @Query("api_key")apiKey:String = API_KEY
     ): ActorsResult
+
+    @GET("person/{actor_id}?")
+    suspend fun ActorDetails(
+        @Path("actor_id") actorId: String,
+        @Query("api_key")apiKey:String = API_KEY
+    ): ActorDetailsResult
+
+    @GET("{actor_id}/movie_credits?")
+    suspend fun GetActorMovies(
+        @Path("actor_id") actorId: String,
+        @Query("api_key")apiKey:String = API_KEY
+    ): ActorCastResult
 }
 
 object RetrofitServiceFactory {
